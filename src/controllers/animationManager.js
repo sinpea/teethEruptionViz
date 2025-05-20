@@ -1,4 +1,4 @@
-const animationLoopDataPrimaryDentition = [{frame:0,changes:{
+const animationLoopDataPrimaryDentition = [{frame:3,changes:{
     "UpperLeftmolar1": 0,
     "UpperLeftmolar2": 0,
     "UpperLeftmolar3": 0,
@@ -31,8 +31,8 @@ const animationLoopDataPrimaryDentition = [{frame:0,changes:{
     "LowerRightCanine": 0,
     "LowerRightIncisor1": 0,
     "LowerRightIncisor2": 0
-}},{},{},{},{},{},{frame:1,changes:{"UpperLeftmolar1":1}},{frame:10,changes:{"UpperLeftmolar1":0}},{frame:11,changes:{"UpperLeftmolar1":1}}];
-const animationLoopDataSecondaryDentition = [{frame:0,changes:{
+}},{},{},{},{},{},{frame:2,changes:{"UpperLeftmolar1":2}},{frame:20,changes:{"UpperLeftmolar1":3}},{frame:21,changes:{"UpperLeftmolar1":2}}];
+const animationLoopDataSecondaryDentition = [{frame:3,changes:{
     "UpperLeftmolar1": 0,
     "UpperLeftmolar2": 0,
     "UpperLeftmolar3": 0,
@@ -65,5 +65,5 @@ const animationLoopDataSecondaryDentition = [{frame:0,changes:{
     "LowerRightCanine": 0,
     "LowerRightIncisor1": 0,
     "LowerRightIncisor2": 0
-}},{},{},{},{},{},{frame:1,changes:{"UpperLeftmolar1":1}},{frame:10,changes:{"UpperLeftmolar1":0}},{frame:11,changes:{"UpperLeftmolar1":1}},{frame:11,changes:{"UpperLeftmolar1":0}}];
+}},{},{},{},{},{},{frame:2,changes:{"UpperLeftmolar1":2}},{frame:20,changes:{"UpperLeftmolar1":3}},{frame:21,changes:{"UpperLeftmolar1":2}},{frame:21,changes:{"UpperLeftmolar1":3}}];
 export {animationLoopDataPrimaryDentition,animationLoopDataSecondaryDentition};

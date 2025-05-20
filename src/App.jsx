@@ -105,7 +105,7 @@ function App() {
   </tbody>
 </table>};
 
-
+  const [teethListSelect,setTeethList] = useState([]);
   //==============ANIMATION CONTROL CODE================================
   const [currentTime, setCurrentTime] = useState(0);
   //const (((switchState)?animationLoopDataPrimaryDentition.length:animationLoopDataSecondaryDentition.length)-1) = 10;
@@ -223,7 +223,15 @@ function App() {
     setTeethState((prevState)=>{
       let obj = Object.create({});
       Object.assign(obj,prevState);
-      obj[a] = obj[a]===0?1:0;
+      if(obj[a]===0 && !(a in teethListSelect)){
+        setTeethList((prev)=>[...prev,a]);
+      }
+      if(obj[a]!=0){
+        setTeethList((prev)=>{
+          return prev.filter((element)=>element !== a);
+        })
+      }
+      obj[a] = obj[a]===0?3:0;
       return obj;
     })
   };
@@ -231,12 +239,15 @@ function App() {
   //to be called during animation process
   const setterMethodUnderAnimation = (changeObj)=>{
     for(const i in changeObj){
-      setTeethState((prevState)=>{
-        let obj = Object.create({});
-        Object.assign(obj,prevState);
-        obj[i] = changeObj[i];
-        return obj;
-      }); 
+        if(i in changeObj){
+          setTeethState((prevState)=>{
+            let obj = Object.create({});
+            Object.assign(obj,prevState);
+            obj[i] = changeObj[i];
+            return obj;
+          });  
+        }
+         
     }
   };
 
@@ -258,8 +269,31 @@ function App() {
     <>
     <button onClick={()=>{setAnimState((prev)=>{return [true,prev[1]]})}}>PLAY</button>
     <button onClick={()=>{setAnimState((prev)=>{return [false,prev[1]]})}}>PAUSE</button>
-    <button onClick={()=>{setAnimState((prev)=>{return [false,prev[1]]});setCurrentTime(0)}}>RESET</button>
-    <div><ReactSwitch onChange={toggleSwitchState} checked={switchState}/></div>
+    <button onClick={()=>{
+      setAnimState((prev)=>{return [false,prev[1]]});
+      setCurrentTime(()=>0);
+      setTeethList(()=>[]);
+      for(const i in dentalPathIds){
+        setTeethState((prevState)=>{
+          let obj = Object.create({});
+          Object.assign(obj,prevState);
+          obj[i] = 0;
+          return obj;
+        })  
+      }
+      }}>RESET</button>
+    <button onClick={()=>{
+    setTeethList(()=>[])
+    for(const i in dentalPathIds){
+      setTeethList((prev)=>[...prev,i]);
+      setTeethState((prevState)=>{
+        let obj = Object.create({});
+        Object.assign(obj,prevState);
+        obj[i] = 3;
+        return obj;
+      })
+    }}}>SELECT ALL TEETH</button>
+    <div><div>Secondary</div><ReactSwitch onChange={toggleSwitchState} checked={switchState}/><div>Primary</div></div>
     <div>Frame = {animState[1]}</div>
     <div style={{maxWidth:600}}>
     <VideoSeekSlider max={10000}
@@ -278,6 +312,11 @@ function App() {
     
     </div>
     <TeethSvg activationState={teethState} setterMethod={setterMethod}/>
+    <div>
+    <ul>
+    {teethListSelect.map((teeth)=>{return <li key={teeth}>{teeth}</li>})}
+    </ul>
+    </div>
     <h1>{switchState?"Primary Dentition":"Secondary Dentition"}</h1>
     <div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>
     </>

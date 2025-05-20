@@ -4,7 +4,7 @@ import { convertToJson } from "../controllers/convertTextToJson";
 import { dentalPathIds } from "../controllers/dentalArcPathIds";
 import "./teethSvg.css"
 function TeethSvg({activationState,setterMethod}){
-   const colorArray = ['grey','yellow','white','sky-blue','blue'];
+   const colorArray = ['grey','yellow','white','skyblue','blue'];
 
    const [jsonData,setJsonData] = useState(null);
     
