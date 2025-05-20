@@ -13,7 +13,9 @@
     "rc-slider": "^11.1.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-video-seek-slider": "^7.0.0"
+    "react-switch": "^7.1.0",
+    "react-video-seek-slider": "^7.0.0",
+    "svgson": "^5.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
