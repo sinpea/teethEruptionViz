@@ -238,9 +238,13 @@ function App() {
 
   //to be called during animation process
   const setterMethodUnderAnimation = (changeObj)=>{
+    
     for(const i in changeObj){
-        if(i in changeObj){
+      
+        if(teethListSelect.findIndex((e)=>e===i)!=-1){
+          console.log(changeObj[i]);
           setTeethState((prevState)=>{
+            
             let obj = Object.create({});
             Object.assign(obj,prevState);
             obj[i] = changeObj[i];
@@ -267,58 +271,65 @@ function App() {
 
   return (
     <>
-    <button onClick={()=>{setAnimState((prev)=>{return [true,prev[1]]})}}>PLAY</button>
-    <button onClick={()=>{setAnimState((prev)=>{return [false,prev[1]]})}}>PAUSE</button>
-    <button onClick={()=>{
-      setAnimState((prev)=>{return [false,prev[1]]});
-      setCurrentTime(()=>0);
-      setTeethList(()=>[]);
-      for(const i in dentalPathIds){
-        setTeethState((prevState)=>{
-          let obj = Object.create({});
-          Object.assign(obj,prevState);
-          obj[i] = 0;
-          return obj;
-        })  
-      }
-      }}>RESET</button>
-    <button onClick={()=>{
-    setTeethList(()=>[])
-    for(const i in dentalPathIds){
-      setTeethList((prev)=>[...prev,i]);
-      setTeethState((prevState)=>{
-        let obj = Object.create({});
-        Object.assign(obj,prevState);
-        obj[i] = 3;
-        return obj;
-      })
-    }}}>SELECT ALL TEETH</button>
-    <div><div>Secondary</div><ReactSwitch onChange={toggleSwitchState} checked={switchState}/><div>Primary</div></div>
-    <div>Frame = {animState[1]}</div>
-    <div style={{maxWidth:600}}>
-    <VideoSeekSlider max={10000}
-        currentTime={currentTime}
-        bufferTime={4000000}
-        onChange={setCurrentTime}
-        secondsPrefix="00:00:"
-        minutesPrefix="00:"
-        timeCodes={[
-          {
-            fromMs: 0,
-            description: 'Description label of the first part',
-          },
-        ]}
-        />
-    
+    <div className='flexCol'>
+      <div>
+        <button onClick={()=>{setAnimState((prev)=>{return [true,prev[1]]})}}>PLAY</button>
+        <button onClick={()=>{setAnimState((prev)=>{return [false,prev[1]]})}}>PAUSE</button>
+        <button onClick={()=>{
+          setAnimState((prev)=>{return [false,prev[1]]});
+          setCurrentTime(()=>0);
+          setTeethList(()=>[]);
+          for(const i in dentalPathIds){
+            setTeethState((prevState)=>{
+              let obj = Object.create({});
+              Object.assign(obj,prevState);
+              obj[i] = 0;
+              return obj;
+            })  
+          }
+          }}>RESET</button>
+        <button onClick={()=>{
+        setTeethList(()=>[])
+        for(const i in dentalPathIds){
+          setTeethList((prev)=>[...prev,i]);
+          setTeethState((prevState)=>{
+            let obj = Object.create({});
+            Object.assign(obj,prevState);
+            obj[i] = 3;
+            return obj;
+          })
+        }}}>SELECT ALL TEETH</button>
+      </div>
+      <div className='flexWrapperSide mini'><div>Secondary</div><ReactSwitch onChange={toggleSwitchState} checked={switchState}/><div>Primary</div></div>
+      <div>Frame = {animState[1]}</div>
+      <div>
+        <div style={{maxWidth:600}}>
+          <VideoSeekSlider max={10000}
+              currentTime={currentTime}
+              bufferTime={4000000}
+              onChange={setCurrentTime}
+              secondsPrefix="00:00:"
+              minutesPrefix="00:"
+              timeCodes={[
+                {
+                  fromMs: 0,
+                  description: 'seek',
+                },
+              ]}
+              />
+        </div>
+      </div>
+      <div className='flexWrapperSide teethList'>
+        <TeethSvg activationState={teethState} setterMethod={setterMethod}/>
+        <div className='listTeeth'>
+          <ul>
+            {teethListSelect.map((teeth)=>{return <li key={teeth}>{teeth}</li>})}
+          </ul>
+        </div>
+      </div>
+      <h1>{switchState?"Primary Dentition":"Secondary Dentition"}</h1>
+      <div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>
     </div>
-    <TeethSvg activationState={teethState} setterMethod={setterMethod}/>
-    <div>
-    <ul>
-    {teethListSelect.map((teeth)=>{return <li key={teeth}>{teeth}</li>})}
-    </ul>
-    </div>
-    <h1>{switchState?"Primary Dentition":"Secondary Dentition"}</h1>
-    <div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>
     </>
   )
 }

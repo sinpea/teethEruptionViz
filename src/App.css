@@ -1,0 +1,30 @@
+.flexWrapperSide{
+    display: flex;
+    justify-content: space-around;
+}
+
+.mini{
+    max-width: 240px;
+}
+
+.teethList{
+    max-height:500px;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 32em;
+    list-style: none;
+    max-width:500px;
+}
+li{
+    height: 2em;
+    line-height: 2em;
+}
+
+.listTeeth{
+    flex-grow: 1;
+}
+
