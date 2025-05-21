@@ -205,6 +205,14 @@ function App() {
     else{
       Object.assign(changeObj,animationLoopDataSecondaryDentition[animState[1]].changes);
     }
+    //highlight still selected stuff after animating
+    //2 is the hifg
+    for(const i of teethListSelect){
+      if(changeObj[i]!=2){
+        console.log('reset color')
+        changeObj[i] = 3;
+      }
+    }
     setterMethodUnderAnimation(changeObj);
   },[animState[1]])
   //==============ANIMATION CONTROL CODE================================
