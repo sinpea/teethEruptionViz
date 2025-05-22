@@ -330,15 +330,18 @@ function App() {
       </div>
       <div className='flexWrapperSide teethList'>
         <TeethSvg activationState={teethState} setterMethod={setterMethod}/>
-        <div className='listTeeth'>
-          <ul>
-            {teethListSelect.map((teeth)=>{return <li key={teeth}>{teeth}</li>})}
-          </ul>
+        <div className='tableContainer'> 
+          <h3>{switchState?"Primary Dentition":"Secondary Dentition"}</h3>
+          {/*<div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>*/}
+          <Table switchState={switchState} activatedList={teethListSelect}/>
         </div>
       </div>
-      <h1>{switchState?"Primary Dentition":"Secondary Dentition"}</h1>
-      {/*<div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>*/}
-      <Table switchState={switchState} activatedList={teethListSelect}/>
+      
+      {/*<div className='listTeeth'>
+        <ul>
+          {teethListSelect.map((teeth)=>{return <li key={teeth}>{teeth}</li>})}
+        </ul>
+      </div>*/}
     </div>
     </>
   )
