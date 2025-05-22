@@ -38,10 +38,10 @@ function PrimaryTable({activatedList}){
   //useEffect(()=>{
   
   for(const i of activatedList){
-    if(i === "UpperLeftmolar1" ||i === "UpperRightMolar1" ){
+    if(i === "UpperLeftmolar2" || i === "UpperRightMolar2"){
       tableList['upper']['1M'] = true;
     }
-    if(i === "UpperLeftmolar2"||i==="UpperLeftmolar3" || i === "UpperRightMolar2"||i==="UpperRightMolar3"){
+    if(i==="UpperLeftmolar3" || i==="UpperRightMolar3"){
       tableList['upper']['2M'] = true;
     }
     if(i === "UpperLeftCanine" || i === "UpperRightCanine1"){
@@ -53,12 +53,13 @@ function PrimaryTable({activatedList}){
     if(i === "UpperLeftIncisor2" || i === "UpperRigthIncisor2"){
       tableList['upper']['CI'] = true;
     }
-    if(i === "LowerLeftMolar1" || i === "LowerRightMolar1"){
-      tableList['lower']['1M'] = true;
-    }
-    if(i === "LowerLeftMolar2" || i === "LowerLeftMolar3" || i === "LowerRightMolar2" || i === "LowerRightMolar3"){
+    if(i === "LowerLeftMolar3" || i === "LowerRightMolar3"){
       tableList['lower']['2M'] = true;
     }
+    if(i === "LowerLeftMolar2" || i === "LowerRightMolar2"){
+      tableList['lower']['1M'] = true;
+    }
+
     if(i === "LowerLeftCanine" || i === "LowerRightCanine"){
       tableList['lower']['C'] = true;
     }

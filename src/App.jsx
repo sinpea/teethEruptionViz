@@ -309,7 +309,7 @@ function App() {
           })
         }}}>SELECT ALL TEETH</button>
       </div>
-      <div className='flexWrapperSide mini'><div>Secondary</div><ReactSwitch onChange={toggleSwitchState} checked={switchState}/><div>Primary</div></div>
+      <div className='flexWrapperSide mini'><div>Secondary</div><ReactSwitch onChange={toggleSwitchState} checked={switchState} onColor='#476' offColor='#076'/><div>Primary</div></div>
       <div>Frame = {animState[1]}</div>
       <div>
         <div style={{maxWidth:600}}>
