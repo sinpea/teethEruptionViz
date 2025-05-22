@@ -16,97 +16,8 @@ import { animationLoopDataSecondaryDentition } from './controllers/animationMana
 import { Table } from './components/table';
 function App() {
   //==============TEXT_DATA_FOR_DISPLAY-================================
-  const dentitionText = 
-{secondary:
-<table>
-  <thead>
-    <tr>
-      <th>Tooth</th>
-      <th>Upper Eruption (years)</th>
-      <th>Lower Eruption (years)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CI</td>
-      <td>7–8</td>
-      <td>6–7</td>
-    </tr>
-    <tr>
-      <td>LI</td>
-      <td>8–9</td>
-      <td>7–8</td>
-    </tr>
-    <tr>
-      <td>1M</td>
-      <td>9–10</td>
-      <td>6–7</td>
-    </tr>
-    <tr>
-      <td>1P</td>
-      <td>10–11</td>
-      <td>10–12</td>
-    </tr>
-    <tr>
-      <td>2P</td>
-      <td>10–12</td>
-      <td>11–12</td>
-    </tr>
-    <tr>
-      <td>C</td>
-      <td>11–12</td>
-      <td>9–10</td>
-    </tr>
-    <tr>
-      <td>2M</td>
-      <td>12–13</td>
-      <td>11–13</td>
-    </tr>
-    <tr>
-      <td>3M</td>
-      <td>17–21</td>
-      <td>17–21</td>
-    </tr>
-  </tbody>
-</table>,primary:
-<table>
-  <thead>
-    <tr>
-      <th>Tooth</th>
-      <th>Lower Eruption (months)</th>
-      <th>Upper Eruption (months)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CI</td>
-      <td>6–10</td>
-      <td>8–12</td>
-    </tr>
-    <tr>
-      <td>LI</td>
-      <td>10–16</td>
-      <td>9–13</td>
-    </tr>
-    <tr>
-      <td>1M</td>
-      <td>14–18</td>
-      <td>13–19 / 14–18</td>
-    </tr>
-    <tr>
-      <td>C</td>
-      <td>17–23</td>
-      <td>16–22</td>
-    </tr>
-    <tr>
-      <td>2M</td>
-      <td>23–31 / 24–30</td>
-      <td>25–33</td>
-    </tr>
-  </tbody>
-</table>};
-
   const [teethListSelect,setTeethList] = useState([]);
+  const [teethAnimatedOnState,setTeethAnimatedOnState] = useState([]);
   //==============ANIMATION CONTROL CODE================================
   const [currentTime, setCurrentTime] = useState(0);
   //const (((switchState)?animationLoopDataPrimaryDentition.length:animationLoopDataSecondaryDentition.length)-1) = 10;
@@ -207,9 +118,9 @@ function App() {
       Object.assign(changeObj,animationLoopDataSecondaryDentition[animState[1]].changes);
     }
     //highlight still selected stuff after animating
-    //2 is the hifg
+    //2 is the hifg && (teethAnimatedOnState.indexOf(i)===-1))
     for(const i of teethListSelect){
-      if(changeObj[i]!=2){
+      if((changeObj[i]!=2  || animState[1] === 0)){
         console.log('reset color')
         changeObj[i] = 3;
       }
@@ -257,8 +168,16 @@ function App() {
             let obj = Object.create({});
             Object.assign(obj,prevState);
             obj[i] = changeObj[i];
+            
             return obj;
-          });  
+          });
+          
+          //add to teethAnimatedOnState
+          if(teethAnimatedOnState.indexOf(i)===-1 && changeObj[i] === 2){
+            setTeethAnimatedOnState((prev)=>{
+              return [...prev,i];
+            })
+          }
         }
          
     }
