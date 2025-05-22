@@ -38,7 +38,6 @@ function PrimaryTable({activatedList}){
   //useEffect(()=>{
   
   for(const i of activatedList){
-    console.log(`BWAHAHAHA ${i}`)
     if(i === "UpperLeftmolar1" ||i === "UpperRightMolar1" ){
       tableList['upper']['1M'] = true;
     }
