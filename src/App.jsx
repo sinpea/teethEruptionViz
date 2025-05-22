@@ -13,6 +13,7 @@ import ReactSwitch from 'react-switch';
 //import each animation separately
 import { animationLoopDataPrimaryDentition } from './controllers/animationManager';
 import { animationLoopDataSecondaryDentition } from './controllers/animationManager';
+import { Table } from './components/table';
 function App() {
   //==============TEXT_DATA_FOR_DISPLAY-================================
   const dentitionText = 
@@ -336,7 +337,8 @@ function App() {
         </div>
       </div>
       <h1>{switchState?"Primary Dentition":"Secondary Dentition"}</h1>
-      <div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>
+      {/*<div className="blackBgText">{switchState?dentitionText.primary:dentitionText.secondary}</div>*/}
+      <Table switchState={switchState} activatedList={teethListSelect}/>
     </div>
     </>
   )
