@@ -70,8 +70,11 @@ function SecondaryTable({activatedList}){
         if(i === "LowerLeftMolar1" || i === "LowerRightMolar1"){
           tableList['lower']['1M'] = true;
         }
-        if(i === "LowerLeftMolar2" || i === "LowerLeftMolar3" || i === "LowerRightMolar2" || i === "LowerRightMolar3"){
+        if(i === "LowerLeftMolar2" || i === "LowerRightMolar2"){
           tableList['lower']['2M'] = true;
+        }
+        if(i === "LowerLeftMolar3" || i === "LowerRightMolar3"){
+          tableList['lower']['3M'] = true;
         }
         if(i === "LowerLeftCanine" || i === "LowerRightCanine"){
           tableList['lower']['C'] = true;
